@@ -23,11 +23,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ServiceRoleStrategyContext {
-    
+
+    private static final ServiceRoleStrategy commonStrategy = new CommonHandlerStrategy();
+
+    private static final String commonServiceName = "CommonService";
+
     private static final Map<String, ServiceRoleStrategy> strategyMap = new ConcurrentHashMap<>();
-    
+
     private static final Map<String, String> serviceNameMap = new ConcurrentHashMap<>();
-    
+
     static {
         strategyMap.put("NameNode", new NameNodeHandlerStrategy());
         strategyMap.put("ResourceManager", new RMHandlerStrategy());
@@ -52,7 +56,7 @@ public class ServiceRoleStrategyContext {
         strategyMap.put("ElasticSearch", new ElasticSearchHandlerStrategy());
         strategyMap.put("Prometheus", new PrometheusHandlerStrategy());
         strategyMap.put("AlertManager", new AlertManagerHandlerStrategy());
-        
+
         strategyMap.put("RANGER", new RangerAdminHandlerStrategy());
         strategyMap.put("ZOOKEEPER", new ZkServerHandlerStrategy());
         strategyMap.put("YARN", new RMHandlerStrategy());
@@ -63,7 +67,7 @@ public class ServiceRoleStrategyContext {
         strategyMap.put("FLINK", new FlinkHandlerStrategy());
         strategyMap.put("KYUUBI", new KyuubiServerHandlerStrategy());
         strategyMap.put("REDIS_CLUSTER", new RedisClusterHandlerStrategy());
-        
+
         // serviceNameMap
         serviceNameMap.put("NameNode", "HDFS");
         serviceNameMap.put("ResourceManager", "YARN");
@@ -88,7 +92,7 @@ public class ServiceRoleStrategyContext {
         serviceNameMap.put("ElasticSearch", "ELASTICSEARCH");
         serviceNameMap.put("Prometheus", "PROMETHEUS");
         serviceNameMap.put("AlertManager", "ALERTMANAGER");
-        
+
         serviceNameMap.put("FLINK", "FLINK");
         serviceNameMap.put("RANGER", "RANGER");
         serviceNameMap.put("YARN", "YARN");
@@ -97,20 +101,25 @@ public class ServiceRoleStrategyContext {
         serviceNameMap.put("KAFKA", "KAFKA");
         serviceNameMap.put("HBASE", "HBASE");
         serviceNameMap.put("KYUUBI", "KYUUBI");
-        
+
+        serviceNameMap.put("RedisMaster", "REDIS_CLUSTER");
+        serviceNameMap.put("RedisWorker", "REDIS_CLUSTER");
+
     }
-    
+
     public static ServiceRoleStrategy getServiceRoleHandler(String type) {
         if (StringUtils.isBlank(type)) {
             return null;
         }
-        return strategyMap.get(type);
+        ServiceRoleStrategy strategy = strategyMap.get(type);
+        return (strategy == null) ? commonStrategy : strategy;
     }
-    
+
     public static String getServiceName(String type) {
         if (StringUtils.isBlank(type)) {
             return null;
         }
-        return serviceNameMap.get(type);
+        String name = serviceNameMap.get(type);
+        return (name == null) ? commonServiceName : name;
     }
 }
