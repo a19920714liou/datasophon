@@ -3,7 +3,7 @@
   "label": "Flink",
   "description": "实时计算引擎",
   "version": "1.17.2",
-  "sortNum": 6,
+  "sortNum": 8,
   "dependencies":[],
   "packageName": "flink-1.17.2-bin-scala_2.12.tgz",
   "decompressPackageName": "flink-1.17.2",

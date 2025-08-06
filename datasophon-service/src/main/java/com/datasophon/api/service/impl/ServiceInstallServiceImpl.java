@@ -758,6 +758,13 @@ public class ServiceInstallServiceImpl implements ServiceInstallService {
         if ("KyuubiServer".equals(serviceRole) && hosts.size() != 2) {
             throw new ServiceException(Status.TWO_KYUUBISERVERS_NEED_TO_BE_DEPLOYED.getMsg());
         }
+        if ("RedisMaster".equals(serviceRole) && hosts.size() < 2) {
+            throw new ServiceException(Status.THREE_REDIS_MASTER.getMsg());
+        }
+        if ("RedisWorker".equals(serviceRole) && hosts.size() < 2) {
+            throw new ServiceException(Status.THREE_REDIS_SLAVE.getMsg());
+        }
+
     }
     
     private List<ServiceConfig> listServiceConfigByServiceInstance(

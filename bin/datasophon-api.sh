@@ -31,6 +31,15 @@ shift
 
 echo "Begin $startStop $command......"
 
+# 检查是否包含debug参数
+is_debug=false
+for arg in "$@"; do
+  if [ "$arg" = "debug" ]; then
+    is_debug=true
+    break
+  fi
+done
+
 source /etc/profile
 
 SCRIPT="$0"
@@ -86,6 +95,12 @@ if [ "$command" = "api" ]; then
   JMX="-javaagent:$DDH_HOME/jmx/jmx_prometheus_javaagent-0.16.1.jar=8586:$DDH_HOME/jmx/jmx_exporter_config.yaml"
   HEAP_OPTS="-Xms1g -Xmx1g -Xmn512m"
   export DDH_OPTS="$HEAP_OPTS $DDH_OPTS $JMX"
+
+  # 如果包含debug参数，添加调试选项
+  if [ "$is_debug" = true ]; then
+    DDH_OPTS="$DDH_OPTS -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+    echo "Debug mode enabled, listening on port 5005"
+  fi
 else
   echo "Error: No command named \`$command' was found."
   exit 1

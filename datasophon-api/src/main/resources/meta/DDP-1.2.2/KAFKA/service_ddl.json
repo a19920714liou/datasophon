@@ -3,7 +3,7 @@
   "label": "Kafka",
   "description": "高吞吐量的分布式发布订阅消息系统",
   "version": "2.4.1",
-  "sortNum": 4,
+  "sortNum": 6,
   "dependencies":["ZOOKEEPER"],
   "packageName": "kafka-2.4.1.tar.gz",
   "decompressPackageName": "kafka-2.4.1",

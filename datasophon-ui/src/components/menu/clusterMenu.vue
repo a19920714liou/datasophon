@@ -27,7 +27,7 @@
 <template>
   <a-menu class="cluster-menu" :mode="mode" :inlineCollapsed="collapsed" :theme="menuTheme" :defaultSelectedKeys="['overview']" :selectedKeys="selectedKeys" :openKeys="sOpenKeys" @click="handleClick" @openChange="openChange" :style="{'min-width': collapsed ? '50px' : '',}">
     <template v-for="(item) in options">
-      <template v-if="!item.children.length">
+      <template v-if="!item.children.length && item.path != 'service-manage'">
         <a-menu-item :key="item.fullPath">
           <span v-if="collapsed">{{ item.name }}</span>
           <router-link :to="{ path: item.fullPath }">

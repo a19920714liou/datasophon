@@ -3,7 +3,7 @@
   "label": "HDFS",
   "description": "分布式大数据存储",
   "version": "3.3.6",
-  "sortNum": 1,
+  "sortNum": 11,
   "dependencies": [
     "ZOOKEEPER"
   ],

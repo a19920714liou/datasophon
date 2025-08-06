@@ -3,7 +3,7 @@
   "label": "YARN",
   "description": "分布式资源调度与管理平台",
   "version": "3.3.6",
-  "sortNum": 2,
+  "sortNum": 4,
   "dependencies":["HDFS"],
   "packageName": "hadoop-3.3.6.tar.gz",
   "decompressPackageName": "hadoop-3.3.6",

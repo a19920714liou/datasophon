@@ -3,7 +3,7 @@
   "label": "ZooKeeper",
   "description": "分布式协调系统",
   "version": "3.8.4",
-  "sortNum": 3,
+  "sortNum": 5,
   "dependencies":[],
   "packageName": "apache-zookeeper-3.8.4-bin.tar.gz",
   "decompressPackageName": "apache-zookeeper-3.8.4-bin",

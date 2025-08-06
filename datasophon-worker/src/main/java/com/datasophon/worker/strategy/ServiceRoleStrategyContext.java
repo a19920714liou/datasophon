@@ -57,6 +57,9 @@ public class ServiceRoleStrategyContext {
         
         // DolphinScheduler
         map.put("MasterServer", new DSMasterHandlerStrategy("DS", "MasterServer"));
+        
+        map.put("RedisMaster", new RedisHandlerStrategy("RedisCluster", "RedisMaster"));
+        map.put("RedisWorker", new RedisHandlerStrategy("RedisCluster", "RedisWorker"));
     }
     
     public static ServiceRoleStrategy getServiceRoleHandler(String type) {

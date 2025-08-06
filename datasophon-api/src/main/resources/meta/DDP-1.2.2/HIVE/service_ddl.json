@@ -3,7 +3,7 @@
   "label": "Hive",
   "description": "离线数据仓库",
   "version": "3.1.3",
-  "sortNum": 5,
+  "sortNum": 7,
   "dependencies":["HDFS"],
   "packageName": "apache-hive-3.1.3-bin.tar.gz",
   "decompressPackageName": "apache-hive-3.1.3-bin",
